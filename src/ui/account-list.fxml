@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="375.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ClassroomGUI">
+   <children>
+      <VBox alignment="CENTER" maxWidth="-Infinity" prefHeight="375.0" prefWidth="600.0">
+         <children>
+            <Label text="Log In to Classroom" textAlignment="CENTER">
+               <font>
+                  <Font name="Malgun Gothic Bold" size="25.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#005bff" />
+                        <Stop color="#005bff" offset="0.007662835249042145" />
+                        <Stop color="#00b5ff" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Username" textAlignment="CENTER" textFill="#102140">
+               <font>
+                  <Font name="Malgun Gothic" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="txtUser" alignment="CENTER" maxWidth="150.0" minWidth="150.0" prefWidth="150.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </TextField>
+            <Label layoutX="276.0" layoutY="183.0" text="Password" textAlignment="CENTER" textFill="#102140">
+               <font>
+                  <Font name="Malgun Gothic" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Label>
+            <PasswordField fx:id="txtPass" alignment="CENTER" maxWidth="150.0" minWidth="150.0" prefWidth="150.0">
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Malgun Gothic" size="12.0" />
+               </font>
+            </PasswordField>
+            <HBox alignment="CENTER">
+               <children>
+                  <Button maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#login" prefWidth="100.0" text="Log In" textAlignment="CENTER" textFill="#102140">
+                     <font>
+                        <Font name="Malgun Gothic" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#showSignUp" prefWidth="100.0" text="Sign Up" textAlignment="CENTER" textFill="#102140">
+                     <font>
+                        <Font name="Malgun Gothic" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>
