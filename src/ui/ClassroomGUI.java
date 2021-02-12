@@ -1,5 +1,6 @@
 package ui;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,9 +12,11 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Browser;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class ClassroomGUI {
 
@@ -35,6 +38,8 @@ public class ClassroomGUI {
     private TextField pictureURL;
     @FXML
     private Circle pictureHolder;
+    @FXML
+    private ChoiceBox<Browser> cbBrowser;
 
     // LOGIN SCREEN ----------------------------------------------------------------------------------------------------
 
@@ -64,7 +69,7 @@ public class ClassroomGUI {
 
     @FXML
     void createUser(ActionEvent event) {
-        System.out.println("");
+
     }
 
     // SHOW SCENES -----------------------------------------------------------------------------------------------------
@@ -91,7 +96,7 @@ public class ClassroomGUI {
     void showSignUp(ActionEvent event) throws IOException {
         Stage stage = (Stage) mainPane.getScene().getWindow();
         stage.setWidth(650);
-        stage.setHeight(875);
+        stage.setHeight(895);
         Parent register = FXMLLoader.load(getClass().getResource("register.fxml"));
         mainPane.getChildren().setAll(register);
     }
