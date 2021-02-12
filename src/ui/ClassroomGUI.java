@@ -57,18 +57,27 @@ public class ClassroomGUI {
 
     @FXML
     void showAccountList(ActionEvent event) throws IOException {
+        Stage stage = (Stage) mainPane.getScene().getWindow();
+        stage.setWidth(616);
+        stage.setHeight(439);
         Parent accountList = FXMLLoader.load(getClass().getResource("account-list.fxml"));
         mainPane.getChildren().setAll(accountList);
     }
 
     @FXML
     void showLogIn(ActionEvent event) throws IOException {
+        Stage stage = (Stage) mainPane.getScene().getWindow();
+        stage.setWidth(616);
+        stage.setHeight(439);
         Parent login = FXMLLoader.load(getClass().getResource("login.fxml"));
         mainPane.getChildren().setAll(login);
     }
 
     @FXML
     void showSignUp(ActionEvent event) throws IOException {
+        Stage stage = (Stage) mainPane.getScene().getWindow();
+        stage.setWidth(650);
+        stage.setHeight(775);
         Parent register = FXMLLoader.load(getClass().getResource("register.fxml"));
         mainPane.getChildren().setAll(register);
     }
