@@ -4,14 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class ClassroomGUI {
@@ -30,6 +31,10 @@ public class ClassroomGUI {
     private RadioButton tbFemale;
     @FXML
     private RadioButton tbOther;
+    @FXML
+    private TextField pictureURL;
+    @FXML
+    private Circle pictureHolder;
 
     // LOGIN SCREEN ----------------------------------------------------------------------------------------------------
 
@@ -43,9 +48,18 @@ public class ClassroomGUI {
     @FXML
     void choosePicture(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Profile Image");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Images","*.jpg","*.png","*.jpeg"));
+        fileChooser.setTitle("Select profile image");
         Stage stage = (Stage) mainPane.getScene().getWindow();
-        fileChooser.showOpenDialog(stage);
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        Image image = null;
+        if(selectedFile != null) {
+            pictureURL.setText(selectedFile.getPath());
+            image = new Image(selectedFile.toURI().toString());
+            pictureHolder.setFill(new ImagePattern(image));
+        } else {
+            pictureURL.setText("No picture selected");
+        }
     }
 
     @FXML
@@ -77,7 +91,7 @@ public class ClassroomGUI {
     void showSignUp(ActionEvent event) throws IOException {
         Stage stage = (Stage) mainPane.getScene().getWindow();
         stage.setWidth(650);
-        stage.setHeight(775);
+        stage.setHeight(875);
         Parent register = FXMLLoader.load(getClass().getResource("register.fxml"));
         mainPane.getChildren().setAll(register);
     }

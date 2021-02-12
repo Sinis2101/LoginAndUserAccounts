@@ -15,11 +15,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="mainPane" prefHeight="700.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ClassroomGUI">
+<Pane fx:id="mainPane" prefHeight="800.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ClassroomGUI">
    <children>
-      <VBox alignment="CENTER" maxWidth="-Infinity" prefHeight="700.0" prefWidth="650.0">
+      <VBox alignment="CENTER" maxWidth="-Infinity" prefHeight="800.0" prefWidth="650.0">
          <children>
             <Label text="Create your account" textAlignment="CENTER">
                <font>
@@ -38,6 +39,11 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Label>
+            <Circle fx:id="pictureHolder" fill="#f4f4f4" radius="50.0" stroke="#999999" strokeType="OUTSIDE">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Circle>
             <Label layoutX="274.0" layoutY="259.0" text="Profile Picture" textAlignment="CENTER">
                <font>
                   <Font name="Malgun Gothic Bold" size="15.0" />
@@ -46,14 +52,29 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Label>
-            <Button maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#choosePicture" prefWidth="100.0" text="Browse" textAlignment="CENTER">
-               <font>
-                  <Font name="Malgun Gothic" size="12.0" />
-               </font>
+            <HBox alignment="CENTER">
+               <children>
+                  <TextField fx:id="pictureURL" disable="true" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="No image selected">
+                     <font>
+                        <Font name="Malgun Gothic" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button maxWidth="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#choosePicture" prefWidth="25.0" text="+" textAlignment="CENTER">
+                     <font>
+                        <Font name="Malgun Gothic" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
                <VBox.margin>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="10.0" />
                </VBox.margin>
-            </Button>
+            </HBox>
             <Label text="Username" textAlignment="CENTER">
                <font>
                   <Font name="Malgun Gothic Bold" size="15.0" />
@@ -62,7 +83,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="txtUser" alignment="CENTER" maxWidth="150.0" minWidth="150.0" prefWidth="150.0">
+            <TextField fx:id="txtUser" alignment="CENTER" maxWidth="180.0" minWidth="180.0" prefWidth="180.0">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
@@ -78,7 +99,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Label>
-            <PasswordField fx:id="txtPass" alignment="CENTER" maxWidth="150.0" minWidth="150.0" prefWidth="150.0">
+            <PasswordField fx:id="txtPass" alignment="CENTER" maxWidth="180.0" minWidth="180.0" prefWidth="180.0">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin>
@@ -176,7 +197,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Label>
-            <DatePicker maxWidth="150.0" minWidth="150.0" prefWidth="150.0">
+            <DatePicker maxWidth="180.0" minWidth="180.0" prefWidth="180.0">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin>
@@ -189,7 +210,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Label>
-            <ChoiceBox prefWidth="150.0">
+            <ChoiceBox maxWidth="180.0" minWidth="180.0" prefWidth="180.0">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin>
