@@ -12,11 +12,11 @@ public class UserAccount {
     private String birthday;
     private Browser favBrowser;
 
-    public UserAccount(String username, String password, String profilePic, Genre genre, String career, String birthday, Browser favBrowser) {
+    public UserAccount(String username, String password, Image profilePic, Genre genre, String career, String birthday, Browser favBrowser) {
 
         this.username = username;
         this.password = password;
-        //this.profilePic = profilePic;
+        this.profilePic = profilePic;
         this.genre = genre;
         this.career = career;
         this.birthday = birthday;
