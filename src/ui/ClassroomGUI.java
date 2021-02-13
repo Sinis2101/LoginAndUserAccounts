@@ -1,6 +1,5 @@
 package ui;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,12 +11,14 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Classroom;
 import model.Genre;
 import model.UserAccount;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 public class ClassroomGUI {
 
@@ -49,15 +50,60 @@ public class ClassroomGUI {
     private DatePicker dpBirthday;
     @FXML
     private TextField txtBrowser;
+    @FXML
+    private TableView<UserAccount> tvAccount;
+    @FXML
+    private TableColumn<UserAccount, String> tcUser;
+    @FXML
+    private TableColumn<UserAccount, String> tcGender;
+    @FXML
+    private TableColumn<UserAccount, String> tcCareer;
+    @FXML
+    private TableColumn<UserAccount, String> tcBirthday;
+    @FXML
+    private TableColumn<UserAccount, String> tcBrowser;
 
     Alert errorAlert = new Alert(Alert.AlertType.WARNING);
     Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
 
+    Classroom classroom = new Classroom();
+
     // LOGIN SCREEN ----------------------------------------------------------------------------------------------------
 
     @FXML
-    void login(ActionEvent event) {
-        System.out.println("");
+    void login(ActionEvent event) throws IOException {
+
+        System.out.println(classroom.getUserAccounts().size());
+
+        String user = txtUser.getText();
+        String password = txtPass.getText();
+
+        if(classroom.getUserAccounts().isEmpty()) {
+            errorAlert.setTitle("Error");
+            errorAlert.setHeaderText("No Users Found");
+            errorAlert.setContentText("There are no existing users.");
+            errorAlert.showAndWait();
+        } else {
+            if(user.isEmpty() || password.isEmpty()) {
+                errorAlert.setTitle("Error");
+                errorAlert.setHeaderText("Blank spaces detected");
+                errorAlert.setContentText("Please enter all the information.");
+                errorAlert.showAndWait();
+            }
+            for(UserAccount userAccount : classroom.getUserAccounts()) {
+                if(userAccount.getUsername().equals(user)) {
+                    if(userAccount.getPassword().equals(password)) {
+                        showAccountList(null);
+                    }
+                } else {
+                    errorAlert.setTitle("Error");
+                    errorAlert.setHeaderText("User doesn't exist");
+                    errorAlert.setContentText("This user doesn't exist in the contact list.");
+                    errorAlert.showAndWait();
+                }
+
+            }
+        }
     }
 
     // REGISTER SCREEN -------------------------------------------------------------------------------------------------
@@ -82,7 +128,7 @@ public class ClassroomGUI {
     }
 
     @FXML
-    void createUser(ActionEvent event) {
+    void createUser(ActionEvent event) throws IOException {
         Boolean careerSelected = true;
         if(!cbSoftware.isSelected() && !cbTelematic.isSelected() && !cbIndustrial.isSelected()) {
             careerSelected = false;
@@ -104,10 +150,13 @@ public class ClassroomGUI {
             String date = dpBirthday.getValue().toString();
             String favBrowser = txtBrowser.getText();
             UserAccount newUser = new UserAccount(user, password, profilePic, genre, careers, date, favBrowser);
+            classroom.getUserAccounts().add(newUser);
             infoAlert.setTitle("Information");
             infoAlert.setHeaderText("Contact added");
             infoAlert.setContentText(user + " was successfully added to the contact list.");
             infoAlert.showAndWait();
+            System.out.println(classroom.getUserAccounts().size());
+            showLogIn(null);
         } else {
             errorAlert.setTitle("Error");
             errorAlert.setHeaderText("Blank spaces detected");
