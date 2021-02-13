@@ -1,6 +1,7 @@
 package model;
 
 import javafx.scene.image.Image;
+import java.util.ArrayList;
 
 public class UserAccount {
 
@@ -8,17 +9,17 @@ public class UserAccount {
     private String password;
     private Image profilePic;
     private Genre genre;
-    private String career;
+    private ArrayList<String> careers;
     private String birthday;
-    private Browser favBrowser;
+    private String favBrowser;
 
-    public UserAccount(String username, String password, Image profilePic, Genre genre, String career, String birthday, Browser favBrowser) {
+    public UserAccount(String username, String password, Image profilePic, Genre genre, ArrayList<String> careers, String birthday, String favBrowser) {
 
         this.username = username;
         this.password = password;
         this.profilePic = profilePic;
         this.genre = genre;
-        this.career = career;
+        this.careers = careers;
         this.birthday = birthday;
         this.favBrowser = favBrowser;
 
@@ -38,13 +39,13 @@ public class UserAccount {
     public Genre getGenre() {
         return genre;
     }
-    public String getCareer() {
-        return career;
+    public ArrayList<String> getCareers() {
+        return careers;
     }
     public String getBirthday() {
         return birthday;
     }
-    public Browser getFavBrowser() {
+    public String getFavBrowser() {
         return favBrowser;
     }
 }
