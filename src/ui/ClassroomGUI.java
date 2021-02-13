@@ -1,6 +1,5 @@
 package ui;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,11 +11,12 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.Browser;
+import model.Genre;
+import model.UserAccount;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ResourceBundle;
+import java.util.ArrayList;
 
 public class ClassroomGUI {
 
@@ -39,7 +39,15 @@ public class ClassroomGUI {
     @FXML
     private Circle pictureHolder;
     @FXML
-    private ChoiceBox<Browser> cbBrowser;
+    private CheckBox cbSoftware;
+    @FXML
+    private CheckBox cbTelematic;
+    @FXML
+    private CheckBox cbIndustrial;
+    @FXML
+    private DatePicker dpBirthday;
+    @FXML
+    private TextField txtBrowser;
 
     // LOGIN SCREEN ----------------------------------------------------------------------------------------------------
 
@@ -50,6 +58,8 @@ public class ClassroomGUI {
 
     // REGISTER SCREEN -------------------------------------------------------------------------------------------------
 
+    Image image = null;
+
     @FXML
     void choosePicture(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -57,7 +67,7 @@ public class ClassroomGUI {
         fileChooser.setTitle("Select profile image");
         Stage stage = (Stage) mainPane.getScene().getWindow();
         File selectedFile = fileChooser.showOpenDialog(stage);
-        Image image = null;
+
         if(selectedFile != null) {
             pictureURL.setText(selectedFile.getPath());
             image = new Image(selectedFile.toURI().toString());
@@ -69,7 +79,22 @@ public class ClassroomGUI {
 
     @FXML
     void createUser(ActionEvent event) {
-
+        ArrayList<String> careers = new ArrayList<String>();
+        String user = txtUser.getText();
+        String password = txtPass.getText();
+        Image profilePic = image;
+        // GET GENDER
+        RadioButton selectedRadioButton = (RadioButton) tgGender.getSelectedToggle();
+        String toggleGroupValue = selectedRadioButton.getText();
+        Genre genre = Genre.valueOf(toggleGroupValue);
+        // GET CAREERS
+        if(cbSoftware.isSelected()) careers.add(cbSoftware.getText());
+        if(cbTelematic.isSelected()) careers.add(cbTelematic.getText());
+        if(cbIndustrial.isSelected()) careers.add(cbIndustrial.getText());
+        //
+        String date = dpBirthday.getValue().toString();
+        String favBrowser = txtBrowser.getText();
+        UserAccount newUser = new UserAccount(user, password, profilePic, genre, careers, date, favBrowser);
     }
 
     // SHOW SCENES -----------------------------------------------------------------------------------------------------
