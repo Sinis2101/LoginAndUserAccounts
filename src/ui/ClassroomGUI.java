@@ -1,5 +1,6 @@
 package ui;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,6 +50,9 @@ public class ClassroomGUI {
     @FXML
     private TextField txtBrowser;
 
+    Alert errorAlert = new Alert(Alert.AlertType.WARNING);
+    Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+
     // LOGIN SCREEN ----------------------------------------------------------------------------------------------------
 
     @FXML
@@ -79,22 +83,37 @@ public class ClassroomGUI {
 
     @FXML
     void createUser(ActionEvent event) {
-        ArrayList<String> careers = new ArrayList<String>();
-        String user = txtUser.getText();
-        String password = txtPass.getText();
-        Image profilePic = image;
-        // GET GENDER
-        RadioButton selectedRadioButton = (RadioButton) tgGender.getSelectedToggle();
-        String toggleGroupValue = selectedRadioButton.getText();
-        Genre genre = Genre.valueOf(toggleGroupValue);
-        // GET CAREERS
-        if(cbSoftware.isSelected()) careers.add(cbSoftware.getText());
-        if(cbTelematic.isSelected()) careers.add(cbTelematic.getText());
-        if(cbIndustrial.isSelected()) careers.add(cbIndustrial.getText());
-        //
-        String date = dpBirthday.getValue().toString();
-        String favBrowser = txtBrowser.getText();
-        UserAccount newUser = new UserAccount(user, password, profilePic, genre, careers, date, favBrowser);
+        Boolean careerSelected = true;
+        if(!cbSoftware.isSelected() && !cbTelematic.isSelected() && !cbIndustrial.isSelected()) {
+            careerSelected = false;
+        }
+        if(!txtUser.getText().equals("") && !txtPass.getText().equals("") && tgGender.getSelectedToggle()!=null && careerSelected && dpBirthday.getValue()!=null && !txtBrowser.getText().equals("")) {
+            ArrayList<String> careers = new ArrayList<String>();
+            String user = txtUser.getText();
+            String password = txtPass.getText();
+            Image profilePic = image;
+            // GET GENDER
+            RadioButton selectedRadioButton = (RadioButton) tgGender.getSelectedToggle();
+            String toggleGroupValue = selectedRadioButton.getText();
+            Genre genre = Genre.valueOf(toggleGroupValue);
+            // GET CAREERS
+            if(cbSoftware.isSelected()) careers.add(cbSoftware.getText());
+            if(cbTelematic.isSelected()) careers.add(cbTelematic.getText());
+            if(cbIndustrial.isSelected()) careers.add(cbIndustrial.getText());
+            // GET DATE
+            String date = dpBirthday.getValue().toString();
+            String favBrowser = txtBrowser.getText();
+            UserAccount newUser = new UserAccount(user, password, profilePic, genre, careers, date, favBrowser);
+            infoAlert.setTitle("Information");
+            infoAlert.setHeaderText("Contact added");
+            infoAlert.setContentText(user + " was successfully added to the contact list.");
+            infoAlert.showAndWait();
+        } else {
+            errorAlert.setTitle("Error");
+            errorAlert.setHeaderText("Blank spaces detected");
+            errorAlert.setContentText("Please enter all the information.");
+            errorAlert.showAndWait();
+        }
     }
 
     // SHOW SCENES -----------------------------------------------------------------------------------------------------
